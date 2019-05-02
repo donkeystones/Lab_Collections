@@ -5,6 +5,8 @@
  */
 package Lab_Collections;
 
+import java.io.IOException;
+
 /**
  *
  * @author Oscar Bäck
@@ -14,8 +16,9 @@ public class Djurinventering {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws IOException {
+        AnimalInventory inv = new AnimalInventory();
+        inv.DisplayReports();
     }
     
 }

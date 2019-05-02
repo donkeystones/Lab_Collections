@@ -5,22 +5,73 @@
  */
 package Lab_Collections;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author Oscar Bäck
+ * 
  */
 public class AnimalInventory {
     
+    private BufferedReader in;
     private List<AnimalReport> reports;
+    private List<Integer> amounts;
+    private List<String> animals;
+    private List<String> locations;
     
-    public AnimalInventory(){
+    public AnimalInventory() throws IOException{
         reports = new ArrayList<>();
+        ReadInventory();
+        AssignAnimalList();
+        
     }
     
-    private void ReadInventory(){
+    private void ReadInventory() throws FileNotFoundException, IOException{
+        String line;
         
+        in = new BufferedReader(new FileReader("C:\\Users\\bacosc\\Documents\\Netbeansproject\\Lab_Collections\\build\\classes\\data\\amount.txt"));
+        
+        while((line = in.readLine()) != null){
+            //Splits the string and converts to int
+            amounts = Arrays.stream(line.replaceAll(" ","").split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        }
+        
+        in = new BufferedReader(new FileReader("C:\\Users\\bacosc\\Documents\\Netbeansproject\\Lab_Collections\\build\\classes\\data\\animals.txt"));
+        
+        while((line = in.readLine()) != null){
+            animals = Arrays.asList(line.split(","));
+        }
+        
+        in = new BufferedReader(new FileReader("C:\\Users\\bacosc\\Documents\\Netbeansproject\\Lab_Collections\\build\\classes\\data\\country.txt"));
+        
+        while((line = in.readLine()) != null){
+            locations = Arrays.asList(line.split(","));
+        }
+        
+        in.close();
+        
+    }
+    
+    private void AssignAnimalList(){
+        AnimalReport report;
+        for(int i = 0; i < amounts.size(); i++){
+            report = new AnimalReport(amounts.get(i),locations.get(i),animals.get(i));
+            reports.add(report);
+        }
+    }
+    
+    public void DisplayReports(){
+        System.out.println("Animal Reports");
+        System.out.println("Amount\t\tSpecies\t\tLocation");
+        for(AnimalReport report : reports){
+            System.out.println(report.getLocation() + ": " + report.getAmount() + " st " + report.getArt());
+        }
     }
     
 }
