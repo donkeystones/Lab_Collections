@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lab_Collections;
+package Lab_Collections_Part_1;
 
 import java.io.IOException;
 

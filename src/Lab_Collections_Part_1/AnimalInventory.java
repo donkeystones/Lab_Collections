@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lab_Collections;
+package Lab_Collections_Part_1;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -34,21 +35,22 @@ public class AnimalInventory {
     
     private void ReadInventory() throws FileNotFoundException, IOException{
         String line;
-        
-        in = new BufferedReader(new FileReader("C:\\Users\\bacosc\\Documents\\Netbeansproject\\Lab_Collections\\build\\classes\\data\\amount.txt"));
+        String filePath = new File("").getAbsolutePath();
+        System.out.println(filePath);
+        in = new BufferedReader(new FileReader(filePath + "/src/data/amount.txt"));
         
         while((line = in.readLine()) != null){
             //Splits the string and converts to int
             amounts = Arrays.stream(line.replaceAll(" ","").split(",")).map(Integer::parseInt).collect(Collectors.toList());
         }
         
-        in = new BufferedReader(new FileReader("C:\\Users\\bacosc\\Documents\\Netbeansproject\\Lab_Collections\\build\\classes\\data\\animals.txt"));
+        in = new BufferedReader(new FileReader(filePath + "/src/data/animals.txt"));
         
         while((line = in.readLine()) != null){
             animals = Arrays.asList(line.split(","));
         }
         
-        in = new BufferedReader(new FileReader("C:\\Users\\bacosc\\Documents\\Netbeansproject\\Lab_Collections\\build\\classes\\data\\country.txt"));
+        in = new BufferedReader(new FileReader(filePath + "/src/data/country.txt"));
         
         while((line = in.readLine()) != null){
             locations = Arrays.asList(line.split(","));
@@ -73,5 +75,11 @@ public class AnimalInventory {
             System.out.println(report.getLocation() + ": " + report.getAmount() + " st " + report.getArt());
         }
     }
+
+    public List<AnimalReport> getReports() {
+        return reports;
+    }
+    
+    
     
 }
