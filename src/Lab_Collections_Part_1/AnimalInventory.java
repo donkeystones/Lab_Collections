@@ -36,7 +36,7 @@ public class AnimalInventory {
     private void ReadInventory() throws FileNotFoundException, IOException{
         String line;
         String filePath = new File("").getAbsolutePath();
-        System.out.println(filePath);
+        //System.out.println(filePath);
         in = new BufferedReader(new FileReader(filePath + "/src/data/amount.txt"));
         
         while((line = in.readLine()) != null){
